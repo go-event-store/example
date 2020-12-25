@@ -5,7 +5,7 @@ import (
 	"errors"
 	"time"
 
-	eventstore "github.com/go-event-store/eventstore"
+	"github.com/go-event-store/eventstore"
 	uuid "github.com/satori/go.uuid"
 )
 

@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
-	eventstore "github.com/go-event-store/eventstore"
+	"github.com/go-event-store/eventstore"
 	"github.com/go-event-store/example/api"
 	_ "github.com/go-event-store/example/docs"
 	todo "github.com/go-event-store/example/internal"

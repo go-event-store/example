@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"time"
 
-	eventstore "github.com/go-event-store/eventstore"
+	"github.com/go-event-store/eventstore"
 )
 
 func EventLogger(action eventstore.DomainEventAction) eventstore.DomainEventMiddleware {

@@ -1,7 +1,7 @@
 package postgres
 
 import (
-	eventstore "github.com/go-event-store/eventstore"
+	"github.com/go-event-store/eventstore"
 	todo "github.com/go-event-store/example/internal"
 	"github.com/go-event-store/pg"
 	"github.com/jackc/pgx/v4/pgxpool"
