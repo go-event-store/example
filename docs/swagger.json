@@ -1,0 +1,322 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Todo Example App for GO EventStore",
+        "title": "Todo Example Service",
+        "contact": {
+            "name": "Frank Jogeleit",
+            "email": "frank.jogeleit@web.de"
+        },
+        "license": {},
+        "version": "1.0"
+    },
+    "paths": {
+        "/create-todo": {
+            "post": {
+                "description": "Create a new Todo",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Write Todo"
+                ],
+                "summary": "Create Todo",
+                "parameters": [
+                    {
+                        "description": "create todo",
+                        "name": "command",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/todo.CreateTodo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {},
+                    "404": {},
+                    "500": {}
+                }
+            }
+        },
+        "/delete-todo": {
+            "post": {
+                "description": "Delete Todo",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Write Todo"
+                ],
+                "summary": "Delete Todo",
+                "parameters": [
+                    {
+                        "description": "delete todo",
+                        "name": "command",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/todo.UndoTodo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {},
+                    "404": {},
+                    "500": {}
+                }
+            }
+        },
+        "/do-todo": {
+            "post": {
+                "description": "Do Todo",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Write Todo"
+                ],
+                "summary": "Do Todo",
+                "parameters": [
+                    {
+                        "description": "do todo",
+                        "name": "command",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/todo.DoTodo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {},
+                    "404": {},
+                    "500": {}
+                }
+            }
+        },
+        "/todo": {
+            "get": {
+                "description": "List all Todo",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Read Todo"
+                ],
+                "summary": "List Todos",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/todo.TodoView"
+                            }
+                        }
+                    },
+                    "404": {}
+                }
+            }
+        },
+        "/todo/{id}": {
+            "get": {
+                "description": "Get Single Todo",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Read Todo"
+                ],
+                "summary": "Get Todo",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "TodoID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/todo.TodoView"
+                        }
+                    },
+                    "404": {}
+                }
+            }
+        },
+        "/undo-todo": {
+            "post": {
+                "description": "Undo Todo",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Write Todo"
+                ],
+                "summary": "Undo Todo",
+                "parameters": [
+                    {
+                        "description": "undo todo",
+                        "name": "command",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/todo.UndoTodo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {},
+                    "404": {},
+                    "500": {}
+                }
+            }
+        },
+        "/update-todo": {
+            "post": {
+                "description": "Update Todo",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Write Todo"
+                ],
+                "summary": "Update Todo",
+                "parameters": [
+                    {
+                        "description": "update todo",
+                        "name": "command",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/todo.UpdateTodo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {},
+                    "404": {},
+                    "500": {}
+                }
+            }
+        }
+    },
+    "definitions": {
+        "todo.CreateTodo": {
+            "type": "object",
+            "required": [
+                "deadline",
+                "description",
+                "title"
+            ],
+            "properties": {
+                "deadline": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "todo.DoTodo": {
+            "type": "object",
+            "required": [
+                "todo_id"
+            ],
+            "properties": {
+                "todo_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "todo.TodoView": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "deadline": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "done": {
+                    "type": "boolean"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "todo.UndoTodo": {
+            "type": "object",
+            "required": [
+                "todo_id"
+            ],
+            "properties": {
+                "todo_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "todo.UpdateTodo": {
+            "type": "object",
+            "required": [
+                "deadline",
+                "description",
+                "title",
+                "todo_id"
+            ],
+            "properties": {
+                "deadline": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "todo_id": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

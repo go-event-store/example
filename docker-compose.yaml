@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+    postgres:
+        image: 'postgres:13-alpine'
+        ports: ['5432:5432']
+        environment:
+            - POSTGRES_DB=event-store
+            - POSTGRES_USER=user
+            - POSTGRES_PASSWORD=password
+            - TZ=Europe/Berlin
+
+    app:
+        build: 
+            context: '.'
+        ports: ['8080:8080']
+        depends_on: ['postgres']
+        links: ['postgres:database']
+        environment: 
+            - DB_URL=postgres://user:password@database:5432/event-store?sslmode=disable
+            - SWAGGER_DOC_JSON=http://localhost:8080/swagger/doc.json

@@ -1,0 +1,216 @@
+definitions:
+  todo.CreateTodo:
+    properties:
+      deadline:
+        type: string
+      description:
+        type: string
+      title:
+        type: string
+    required:
+    - deadline
+    - description
+    - title
+    type: object
+  todo.DoTodo:
+    properties:
+      todo_id:
+        type: string
+    required:
+    - todo_id
+    type: object
+  todo.TodoView:
+    properties:
+      created_at:
+        type: string
+      deadline:
+        type: string
+      description:
+        type: string
+      done:
+        type: boolean
+      id:
+        type: string
+      title:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  todo.UndoTodo:
+    properties:
+      todo_id:
+        type: string
+    required:
+    - todo_id
+    type: object
+  todo.UpdateTodo:
+    properties:
+      deadline:
+        type: string
+      description:
+        type: string
+      title:
+        type: string
+      todo_id:
+        type: string
+    required:
+    - deadline
+    - description
+    - title
+    - todo_id
+    type: object
+info:
+  contact:
+    email: frank.jogeleit@web.de
+    name: Frank Jogeleit
+  description: Todo Example App for GO EventStore
+  license: {}
+  title: Todo Example Service
+  version: "1.0"
+paths:
+  /create-todo:
+    post:
+      consumes:
+      - application/json
+      description: Create a new Todo
+      parameters:
+      - description: create todo
+        in: body
+        name: command
+        required: true
+        schema:
+          $ref: '#/definitions/todo.CreateTodo'
+      produces:
+      - application/json
+      responses:
+        "204": {}
+        "404": {}
+        "500": {}
+      summary: Create Todo
+      tags:
+      - Write Todo
+  /delete-todo:
+    post:
+      consumes:
+      - application/json
+      description: Delete Todo
+      parameters:
+      - description: delete todo
+        in: body
+        name: command
+        required: true
+        schema:
+          $ref: '#/definitions/todo.UndoTodo'
+      produces:
+      - application/json
+      responses:
+        "204": {}
+        "404": {}
+        "500": {}
+      summary: Delete Todo
+      tags:
+      - Write Todo
+  /do-todo:
+    post:
+      consumes:
+      - application/json
+      description: Do Todo
+      parameters:
+      - description: do todo
+        in: body
+        name: command
+        required: true
+        schema:
+          $ref: '#/definitions/todo.DoTodo'
+      produces:
+      - application/json
+      responses:
+        "204": {}
+        "404": {}
+        "500": {}
+      summary: Do Todo
+      tags:
+      - Write Todo
+  /todo:
+    get:
+      consumes:
+      - application/json
+      description: List all Todo
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/todo.TodoView'
+            type: array
+        "404": {}
+      summary: List Todos
+      tags:
+      - Read Todo
+  /todo/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get Single Todo
+      parameters:
+      - description: TodoID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/todo.TodoView'
+        "404": {}
+      summary: Get Todo
+      tags:
+      - Read Todo
+  /undo-todo:
+    post:
+      consumes:
+      - application/json
+      description: Undo Todo
+      parameters:
+      - description: undo todo
+        in: body
+        name: command
+        required: true
+        schema:
+          $ref: '#/definitions/todo.UndoTodo'
+      produces:
+      - application/json
+      responses:
+        "204": {}
+        "404": {}
+        "500": {}
+      summary: Undo Todo
+      tags:
+      - Write Todo
+  /update-todo:
+    post:
+      consumes:
+      - application/json
+      description: Update Todo
+      parameters:
+      - description: update todo
+        in: body
+        name: command
+        required: true
+        schema:
+          $ref: '#/definitions/todo.UpdateTodo'
+      produces:
+      - application/json
+      responses:
+        "204": {}
+        "404": {}
+        "500": {}
+      summary: Update Todo
+      tags:
+      - Write Todo
+swagger: "2.0"
