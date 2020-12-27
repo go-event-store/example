@@ -14,8 +14,8 @@ func NewTodoReadModelProjector(eventStore *eventstore.EventStore, pool *pgxpool.
 		Init(func() interface{} {
 			return struct{}{}
 		}).
-		When(map[string]func(state interface{}, event eventstore.DomainEvent) interface{}{
-			"TodoWasCreated": func(state interface{}, event eventstore.DomainEvent) interface{} {
+		When(map[string]eventstore.EventHandler{
+			"TodoWasCreated": func(state interface{}, event eventstore.DomainEvent) (interface{}, error) {
 				projector.ReadModel.Stack("insert", map[string]interface{}{
 					"id":          event.AggregateID().String(),
 					"title":       event.Payload().(todo.TodoWasCreated).Title,
@@ -25,9 +25,9 @@ func NewTodoReadModelProjector(eventStore *eventstore.EventStore, pool *pgxpool.
 					"created":     event.CreatedAt(),
 				})
 
-				return state
+				return state, nil
 			},
-			"TodoWasUpdated": func(state interface{}, event eventstore.DomainEvent) interface{} {
+			"TodoWasUpdated": func(state interface{}, event eventstore.DomainEvent) (interface{}, error) {
 				projector.ReadModel.Stack("update", map[string]interface{}{
 					"title":       event.Payload().(todo.TodoWasUpdated).Title,
 					"description": event.Payload().(todo.TodoWasUpdated).Description,
@@ -38,9 +38,9 @@ func NewTodoReadModelProjector(eventStore *eventstore.EventStore, pool *pgxpool.
 					"id": event.AggregateID().String(),
 				})
 
-				return state
+				return state, nil
 			},
-			"TodoWasDone": func(state interface{}, event eventstore.DomainEvent) interface{} {
+			"TodoWasDone": func(state interface{}, event eventstore.DomainEvent) (interface{}, error) {
 				projector.ReadModel.Stack("update", map[string]interface{}{
 					"done":    true,
 					"updated": event.CreatedAt(),
@@ -48,9 +48,9 @@ func NewTodoReadModelProjector(eventStore *eventstore.EventStore, pool *pgxpool.
 					"id": event.AggregateID().String(),
 				})
 
-				return state
+				return state, nil
 			},
-			"TodoWasUndone": func(state interface{}, event eventstore.DomainEvent) interface{} {
+			"TodoWasUndone": func(state interface{}, event eventstore.DomainEvent) (interface{}, error) {
 				projector.ReadModel.Stack("update", map[string]interface{}{
 					"done":    false,
 					"updated": event.CreatedAt(),
@@ -58,14 +58,14 @@ func NewTodoReadModelProjector(eventStore *eventstore.EventStore, pool *pgxpool.
 					"id": event.AggregateID().String(),
 				})
 
-				return state
+				return state, nil
 			},
-			"TodoWasDeleted": func(state interface{}, event eventstore.DomainEvent) interface{} {
+			"TodoWasDeleted": func(state interface{}, event eventstore.DomainEvent) (interface{}, error) {
 				projector.ReadModel.Stack("remove", map[string]interface{}{
 					"id": event.AggregateID().String(),
 				})
 
-				return state
+				return state, nil
 			},
 		})
 
