@@ -60,11 +60,10 @@ github.com/gin-gonic/gin v1.3.0/go.mod h1:7cKuhb5qV2ggCFctp2fJQ+ErvciLZrIeoOSOm6
 github.com/gin-gonic/gin v1.4.0/go.mod h1:OW2EZn3DO8Ln9oIKOvM++LBO+5UPHJJDH72/q/3rZdM=
 github.com/gin-gonic/gin v1.6.3 h1:ahKqKTFpO5KTPHxWZjEdPScmYaGtLo8Y4DMHoEsnp14=
 github.com/gin-gonic/gin v1.6.3/go.mod h1:75u5sXoLsGZoRN5Sgbi1eraJ4GU3++wFwWzhwvtwp4M=
-github.com/go-event-store/eventstore v1.0.0/go.mod h1:s8/jLg39ufNeSNOZXAi84S6gVIFIDS0CobhTniD5THo=
-github.com/go-event-store/eventstore v1.1.0 h1:iLaQWu7qGsqHbkb+GRCAFAV/HTXZMIwtQvk0zt7lzVk=
-github.com/go-event-store/eventstore v1.1.0/go.mod h1:P1Ok5eudlIPB8wdsL1lc6l2Cb+SDveMQYpyUKIrYN8k=
-github.com/go-event-store/pg v1.0.0 h1:2RHFkCMzg4i6gl30u4GMHRIsfimrRrLjP9YyEbC0j84=
-github.com/go-event-store/pg v1.0.0/go.mod h1:mHwraIDy52D5HQDGLWNqMrglGZ0mRZrz29eHwdl+SNU=
+github.com/go-event-store/eventstore v0.6.0 h1:NysulZluxTvHEbreKmBgowrQJ1dYmIZc69GB0WHIFjk=
+github.com/go-event-store/eventstore v0.6.0/go.mod h1:P1Ok5eudlIPB8wdsL1lc6l2Cb+SDveMQYpyUKIrYN8k=
+github.com/go-event-store/pg v0.6.0 h1:xKfJ+oMAJZSigONwWt7Xq3uYV+Roxg3LNWGjkLCyQXc=
+github.com/go-event-store/pg v0.6.0/go.mod h1:k6XyIdCChElUItAvoSYA+tRfqU2zieIgCX+JHipm7Fk=
 github.com/go-gl/glfw v0.0.0-20190409004039-e6da0acd62b1/go.mod h1:vR7hzQXu2zJy9AVAgeJqvqgH9Q5CA+iKCZ2gyEVpxRU=
 github.com/go-kit/kit v0.8.0/go.mod h1:xBxKIO96dXMWWy0MnWVtmwkA9/13aqxPnvrjFYMA2as=
 github.com/go-logfmt/logfmt v0.3.0/go.mod h1:Qt1PoO58o5twSAckw1HlFXLmHsOX5/0LbT9GBnD5lWE=
